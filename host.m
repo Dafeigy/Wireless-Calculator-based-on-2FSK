@@ -1,3 +1,4 @@
+clear all
 operater=[
 0 0 0 0;
 0 0 0 1;
@@ -16,15 +17,31 @@ BCD=[
 1 1 0 0;
 1 1 0 1; 
 ];
-equal=input('ÊäÈëËãÊ½£¿','s');
+equal=input('è¾“å…¥ç®—å¼ï¼Ÿ','s');
 len=length(equal);
 i=1;
 while (equal(i)~='+' && equal(i)~='-' && equal(i)~='*' && equal(i)~='/' )
     i=i+1;
 end
 n=i;% location of operater
-num1=str2double(equal(1:n-1));
-num2=str2double(equal(n+1:len));
+num1len=n-1;%num1é•¿åº¦
+num2len=len-n;%num2é•¿åº¦
+
+num1=equal(1:n-1);
+num_1=[];
+for i=1:num1len
+    temp=str2double(num1(i));
+    codetemp=BCD((temp+1),:);
+    num_1=[num_1,codetemp];
+end
+num2=equal(n+1:len);
+num_2=[];
+for i=1:num2len
+    temp=str2double(num2(i));
+    codetemp=BCD((temp+1),:);
+    num_2=[num_2,codetemp];
+end
+
 operatenum=equal(n);
 if operatenum =='+'
     k=1;
@@ -40,18 +57,20 @@ if operatenum =='/'
 end
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%±àÂëÕûºÏ%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-emit_temp0=[BCD((num1+1),:),operater(k,:),BCD((num2+1),:)];
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%ç¼–ç æ•´åˆ%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+emit_temp0=[num_1,operater(k,:),num_2];
+disp('ç®—å¼åŸºæœ¬çš„ç¼–ç ')
 disp(emit_temp0);
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Ôö¼Ó±êÊ¾Âë%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%å¢åŠ æ ‡ç¤ºç %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 emit_temp=[ones(1,14),[1 1 1 1 1 0 0 1 1 0 1 0 1],emit_temp0,[0 0 0 0 0],[1 1 1 1 1 0 0 1 1 0 1 0 1]];
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-disp('×îÖÕ·¢Éä±àÂë£º'+emit_temp);
+disp('æœ€ç»ˆå‘å°„ç¼–ç ï¼š');
+disp(emit_temp);
 final_temp=[];
 
 
-%%%%%%%%%%%%%%%%%%%±àÂëÀ©¿í100±¶%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%ç¼–ç æ‰©å®½100å€%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 for index=1:length(emit_temp)
             if emit_temp(index)
                 final_temp=[final_temp ones(1,100)];
@@ -65,12 +84,12 @@ end
 
 
 
-f2=1000;%1000HZ¶ÔÓ¦1
+f2=1000;%1000HZå¯¹åº”1
 f1=2000;%0
 fs=8000;
 t2=1/fs:1/fs:1/f2;
 t1=1/fs:1/fs:1/f1;
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%À©¿í%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%æ‰©å®½%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 carrier1Data_temp=sin(2*pi*f2*t2);
 carrier1Data=repmat(carrier1Data_temp,1,10);
 
@@ -88,6 +107,19 @@ for index=1:100:length(final_temp)
 end
 
 audiowrite('Ca.wav',modulatedData,fs);
+fs=8000;
+[xt,fs] = audioread('Ca.wav');
+data = xt();  %æˆªå–
+%å°†æ•°æ®ä¿å­˜åˆ°TXT
+fid = fopen('myData.txt','w');
+fprintf(fid,'%d\r\n',data);
+fclose(fid);
+
+dataFFT = fft(data);
+magX = abs(dataFFT);
+figure(1);%%%%åŸæ¥çš„å£°éŸ³æ—¶åŸŸ%%%%%%
+plot(abs(fft(data)));
+title('åŸæ¥çš„å£°éŸ³æ—¶åŸŸ');
 sound(modulatedData,fs);
 
 
