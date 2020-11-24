@@ -4,13 +4,11 @@ b2=decode(b3',7,4,'hamming/binary');%%汉明解码
 b=num2str(b2');
 
 %------------翻译并且计算
-
       str1=char();
       str=[]
       for k=1:length(b);
           str1=strcat(str1,num2str(b(k)));
       end
-    
       disp(str1);
       for l=1:4:length(str1)-4;
           num=str2num(str1(l:l+3));
@@ -44,9 +42,7 @@ b=num2str(b2');
                 case 1101
                     str=[str '9'];
                 case 1110
-                    str=[str '('];
-                case 1111
-                    str=[str ')'];
+                    str=[str '.'];
                 otherwise
                     disp('输入数据有误');
           end
