@@ -1,5 +1,28 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%算式输入%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-equal='9877-77';%Later I will change a more convenient way to load the equation
+clear
+fid1 = fopen('equal.txt');
+tline = fgetl(fid1);
+equal='';
+while ischar(tline)
+%disp(tline);
+equal=[equal,tline];
+tline = fgetl(fid1);
+end
+disp(equal);
+fclose(fid1);
+%%%%%%%%%%%%%%%%%%%%%%%%正确结果读取%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+result_matrix='';
+fid2 = fopen('result.txt');
+tline = fgetl(fid2);
+while ischar(tline)
+%disp(tline);
+result_matrix=[result_matrix,(tline),'='];
+tline = fgetl(fid2);
+end
+fclose(fid2);
+
+
+
 %------------------构建滤波器
 fs=32000;  
 f1=4000;
@@ -23,7 +46,7 @@ lpf=fir1(44,160/fss);
 % 
 % disp('算式基本的编码')
 % disp(emit_temp0);
-emit_final=eNcoDe(equal)
+emit_final=eNcoDe(equal);
 disp(emit_final);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%扩宽与调制、装载、发射%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -79,9 +102,22 @@ a3(a3>0)=1;
 a3(a3<0)=0;%------利用收到的160次，都利用了进行运算； 
 b33=BARK(a3,2); %------------------------------------------------寻找巴克码
 return_result=TransCal(b33);  
+newstr=split(return_result,"=");
+res='';
+for i=1:(length(newstr))
+   res=res+(num2str(eval(newstr(i)))+"=");
+end
 %------------------------------------------------------------------解码结束
 disp("算式结果");
-disp(eval(equal));
+backres=split(res,"=");
+trueres=split(result_matrix,"=");
+mse=length(trueres);
+for i=1:length(trueres)-1
+    if trueres(i)~=backres(i)
+        mse=mse-1;
+    end
+end
+disp(mse);
 disp("返回结果");
-disp(return_result);
+disp(newstr);
 

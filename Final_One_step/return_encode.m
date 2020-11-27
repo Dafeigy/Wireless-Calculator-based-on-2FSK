@@ -33,7 +33,7 @@ n=length(result); %g取得字符串长度
                     bittosend_temp0=[bittosend_temp0 '1101'];
                 case '.'
                     bittosend_temp0=[bittosend_temp0 '1110'];
-                case '?'
+                case '='
                     bittosend_temp0=[bittosend_temp0 '1111'];
                 otherwise
                     disp('输入数据有误');

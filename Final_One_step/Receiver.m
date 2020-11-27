@@ -59,10 +59,14 @@ a3=sum(a2);
 a3(a3>0)=1;
 a3(a3<0)=0;%------利用收到的160次，都利用了进行运算； 
 b33=BARK(a3,2); %------------------------------------------------寻找巴克码
-str=TransCal(b33);  
+equal=TransCal(b33);  
 %------------------------------------------------------------------解码结束
-disp(str);
-temp=eval(str);
+disp(equal);
+newstr=split(equal,"=");
+res='';
+for i=1:(length(newstr))
+   res=res+(num2str(eval(newstr(i)))+"=");
+end
 result=num2str(temp);
 disp(result);
 disp('开始编码……');   
