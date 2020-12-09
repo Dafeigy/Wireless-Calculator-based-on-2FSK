@@ -14,7 +14,7 @@ b=num2str(b2');
           num=str2num(str1(l:l+3));
           switch num
                 case 0000
-                    str=[str '+'];
+                    str=[str];
                 case 0001
                     str=[str '-'];
                 case 0010
@@ -42,7 +42,9 @@ b=num2str(b2');
                 case 1101
                     str=[str '9'];
                 case 1110
-                    str=[str '.'];
+                    str=[str '+'];
+                case 1111
+                    str=[str '='];
                 otherwise
                     disp('输入数据有误');
           end

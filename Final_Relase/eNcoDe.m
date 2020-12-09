@@ -4,7 +4,7 @@ n=length(result); %取得字符串长度
         for k=1:n;
             switch result(k)
                 case '+'
-                    bittosend_temp0=[bittosend_temp0 '0000'];
+                    bittosend_temp0=[bittosend_temp0 '1110'];
                 case '-'
                     bittosend_temp0=[bittosend_temp0 '0001'];
                 case '*'
@@ -31,8 +31,8 @@ n=length(result); %取得字符串长度
                     bittosend_temp0=[bittosend_temp0 '1100'];
                 case '9'
                     bittosend_temp0=[bittosend_temp0 '1101'];
-                case '.'
-                    bittosend_temp0=[bittosend_temp0 '1110'];
+                case ''
+                    bittosend_temp0=[bittosend_temp0 '0000'];
                 case '='
                     bittosend_temp0=[bittosend_temp0 '1111'];
                 otherwise

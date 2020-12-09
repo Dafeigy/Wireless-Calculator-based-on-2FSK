@@ -8,7 +8,7 @@ f21=f2-500;%带通
 f22=f2+500;
 X=100;%拓宽多少倍
 DOWN=160;%下采样
-T1=3;%采样时间
+T1=8;%采样时间
 bark=[1 1 1 1 1 0 0 1 1 0 1 0 1];
 bark1=[ones(1,5*DOWN) -ones(1,2*DOWN) ones(1,2*DOWN)  -ones(1,DOWN)  ones(1,DOWN) -ones(1,DOWN) ones(1,DOWN)];
 %------------------构建滤波器
@@ -62,16 +62,18 @@ b33=BARK(a3,2); %------------------------------------------------寻找巴克码
 equal=TransCal(b33);  
 %------------------------------------------------------------------解码结束
 disp(equal);
+equal=equal(1:17);
+disp(equal);
 newstr=split(equal,"=");
 res='';
 for i=1:(length(newstr))
-   res=res+(num2str(eval(newstr(i)))+"=");
+   res=[res,(num2str(eval(cell2mat(newstr(i)))+"="))];
 end
-result=num2str(temp);
+result=num2str(res); 
 disp(result);
 disp('开始编码……');   
  %---------------------------------------------------------------------
 result = return_encode(result);      %-----------------译码，并加巴克码     
-c1 = eNlarGe(result,X)   %-----------------%拓宽基带信号
+c1 = eNlarGe(result,X) ;  %-----------------%拓宽基带信号
 Modu=CaRreiR(f1,f2,fs,c1);%-----载波 f1，f2，fs,拓宽的基带信号
 sound(Modu,fs);%----发射声音
