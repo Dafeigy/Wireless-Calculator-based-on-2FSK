@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://github.com/Dafeigy/Wireless-Calculator-based-on-2FSK/tree/main/Pic/logo.jpg" alt="pyecharts logo" width=200 height=200 />
+    <img src="https://github.com/Dafeigy/Wireless-Calculator-based-on-2FSK/blob/main/Pic/logo.jpg" alt="logo" width=200 height=200 />
 </p>
 
 <h1 align="center">Wireless-Calculator-based-on-2FSK</h1>
@@ -44,7 +44,7 @@
 
 首先你需要先下载并解压这个项目：
 
-![](https://github.com/Dafeigy/Wireless-Calculator-based-on-2FSK/tree/main/Pic/QQ截图20201209213531.png)
+![](https://github.com/Dafeigy/Wireless-Calculator-based-on-2FSK/blob/main/Pic/QQ%E6%88%AA%E5%9B%BE20201209213531.png)
 
 如果你的下载速度很慢的话，我在[这里](https://pan.baidu.com/s/1HfDN0fAz598NK8dFCDAhRg)留了一个备用网址，提取码是TJU的建校年份。
 
@@ -89,7 +89,7 @@
 
 **然后**写出程序框图（我摸了，把ASK改成2FSK就好）：
 
-![](https://github.com/Dafeigy/Wireless-Calculator-based-on-2FSK/tree/main/Pic/QQ截图20201209214603.png)
+![](https://github.com/Dafeigy/Wireless-Calculator-based-on-2FSK/blob/main/Pic/QQ%E6%88%AA%E5%9B%BE20201209214603.png)
 
 值得注意的一点是，我用了**非相干**解调，以及**巴克码作为同步帧**。
 
