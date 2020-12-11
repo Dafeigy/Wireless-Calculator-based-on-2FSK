@@ -108,7 +108,7 @@
 
 **后期测试调整：**
 
-详情可以看[**开发历程**](📚开发历程)，我这里就不写了哈。
+详情可以看[**开发历程**](https://github.com/Dafeigy/Wireless-Calculator-based-on-2FSK#%E5%BC%80%E5%8F%91%E5%8E%86%E7%A8%8B)，我这里就不写了哈。
 
 *详细版本的我会后续写一个PDF文档。
 
